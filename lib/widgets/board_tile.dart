@@ -45,7 +45,6 @@ class BoardTile extends StatelessWidget {
         {
           widget =
               _containerBlueGreyWrapper(Image.asset('assets/images/x.png'));
-          // widget = Text('X');
         }
         break;
 

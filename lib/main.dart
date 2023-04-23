@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tic_tac_toe_scapia/data/tile_state.dart';
+import 'package:tic_tac_toe_scapia/utils/utils.dart';
 import 'package:tic_tac_toe_scapia/widgets/board_tiles_wrap.dart';
 import 'package:tic_tac_toe_scapia/widgets/common_app_bar.dart';
 import 'package:tic_tac_toe_scapia/widgets/common_text_button.dart';
@@ -86,7 +87,7 @@ class _MyAppState extends State<MyApp> {
             : TileState.cross;
       });
 
-      final winner = _checkWinner();
+      final winner = checkWinner(_boardState);
       if (winner != null) {
         _showWinnerDialog(winner);
       } else {
@@ -101,39 +102,6 @@ class _MyAppState extends State<MyApp> {
         }
       }
     }
-  }
-
-  TileState? _checkWinner() {
-    winnerForMatch(a, b, c) {
-      if (_boardState[a] != TileState.empty) {
-        if ((_boardState[a] == _boardState[b]) &&
-            (_boardState[b] == _boardState[c])) {
-          return _boardState[a];
-        }
-      }
-      return null;
-    }
-
-    final checks = [
-      winnerForMatch(0, 1, 2),
-      winnerForMatch(3, 4, 5),
-      winnerForMatch(6, 7, 8),
-      winnerForMatch(0, 3, 6),
-      winnerForMatch(1, 4, 7),
-      winnerForMatch(2, 5, 8),
-      winnerForMatch(0, 4, 8),
-      winnerForMatch(2, 4, 6),
-    ];
-
-    TileState? winner;
-    for (int i = 0; i < checks.length; i++) {
-      if (checks[i] != null) {
-        winner = checks[i];
-        break;
-      }
-    }
-
-    return winner;
   }
 
   void _showWinnerDialog(TileState tileState) {
